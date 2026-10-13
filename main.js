@@ -1,57 +1,175 @@
 // Case Study CTA Functionality - Defined at the top for global availability
 function initCaseStudyCTAs() {
   console.log('initCaseStudyCTAs function called');
-  const ctaBtns = document.querySelectorAll('.case-cta-btn');
-  
-  ctaBtns.forEach(btn => {
+
+  document.querySelectorAll('.case-cta-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       const caseId = this.dataset.case;
       const expandedContent = document.getElementById(`${caseId}-expanded`);
       const caseStudy = document.getElementById(`${caseId}-case`);
-      
       if (!expandedContent || !caseStudy) return;
-      
-      const isExpanded = this.classList.contains('expanded');
-      
-      if (isExpanded) {
-        // Collapse
-        this.classList.remove('expanded');
-        expandedContent.classList.remove('expanded');
-        
-        // Update button text
-        this.querySelector('.cta-text').textContent = 'Learn More';
-        
-        // Remove expanded state from case study
-        caseStudy.classList.remove('case-expanded');
-        
+
+      if (this.classList.contains('expanded')) {
+        collapseCase(this, expandedContent, caseStudy);
       } else {
-        // First, collapse any other expanded cases
-        document.querySelectorAll('.case-cta-btn.expanded').forEach(otherBtn => {
-          if (otherBtn !== this) {
-            otherBtn.click(); // This will trigger the collapse
-          }
-        });
-        
-        // Expand this case
-        this.classList.add('expanded');
-        expandedContent.classList.add('expanded');
-        
-        // Update button text
-        this.querySelector('.cta-text').textContent = 'Show Less';
-        
-        // Add expanded state to case study
-        caseStudy.classList.add('case-expanded');
-        
-        // Scroll the case study into view after animation
-        setTimeout(() => {
-          caseStudy.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
-          });
-        }, 300);
+        expandCase(this, expandedContent, caseStudy);
       }
     });
   });
+}
+
+// Track scroll boundary for fixed CTA — pin to bottom of section when scrolled past
+let bmwCtaScrollHandler = null;
+
+function startBmwCtaBoundaryCheck(btn, caseStudy) {
+  if (bmwCtaScrollHandler) window.removeEventListener('scroll', bmwCtaScrollHandler);
+
+  // The bottom offset the button uses when fixed (matches CSS clamp)
+  const getBottomOffset = () => {
+    const vh4 = window.innerHeight * 0.04;
+    return Math.max(16, Math.min(vh4, 32)); // mirrors clamp(1rem, 4vh, 2rem)
+  };
+
+  const heroWrapper = caseStudy.querySelector('.bmw-hero-wrapper');
+
+  bmwCtaScrollHandler = () => {
+    const caseRect = caseStudy.getBoundingClientRect();
+    const heroRect = heroWrapper.getBoundingClientRect();
+    const bottomOffset = getBottomOffset();
+    const btnHeight = btn.offsetHeight;
+    // Where the button's bottom edge would be if fixed
+    const fixedBtnBottom = window.innerHeight - bottomOffset;
+    const fixedBtnTop = fixedBtnBottom - btnHeight;
+
+    // If hero bottom is still visible, button stays in its original absolute position
+    const heroStillVisible = heroRect.bottom > fixedBtnTop;
+    // If case study bottom is above the fixed button position, pin to section bottom
+    const pastBottom = caseRect.bottom < fixedBtnBottom + btnHeight;
+
+    if (heroStillVisible) {
+      // Button is at or above its original spot — keep it absolute in the hero
+      btn.classList.add('cta-at-origin');
+      btn.classList.remove('cta-pinned');
+    } else if (pastBottom) {
+      // Scrolled past the expanded content — pin to section bottom
+      btn.classList.remove('cta-at-origin');
+      btn.classList.add('cta-pinned');
+    } else {
+      // In between — float fixed
+      btn.classList.remove('cta-at-origin');
+      btn.classList.remove('cta-pinned');
+    }
+  };
+
+  window.addEventListener('scroll', bmwCtaScrollHandler, { passive: true });
+  bmwCtaScrollHandler();
+}
+
+function stopBmwCtaBoundaryCheck(btn) {
+  if (bmwCtaScrollHandler) {
+    window.removeEventListener('scroll', bmwCtaScrollHandler);
+    bmwCtaScrollHandler = null;
+  }
+  btn.classList.remove('cta-pinned');
+  btn.classList.remove('cta-at-origin');
+}
+
+function expandCase(btn, expandedContent, caseStudy) {
+  btn.classList.add('expanded');
+  btn.querySelector('.cta-text').textContent = 'Show Less';
+  btn.querySelector('.cta-icon').innerHTML = '↑';
+  expandedContent.classList.add('expanded');
+  caseStudy.classList.add('case-expanded');
+
+  const sections = expandedContent.querySelectorAll('.case-stats-bar, .case-content-section');
+  const statItems = expandedContent.querySelectorAll('.stat-item');
+
+  gsap.set(expandedContent, { height: 'auto', opacity: 1 });
+  const fullHeight = expandedContent.scrollHeight;
+  gsap.fromTo(expandedContent,
+    { height: 0, opacity: 0 },
+    { height: fullHeight, opacity: 1, duration: 0.6, ease: 'power2.out', onComplete: () => {
+      expandedContent.style.height = 'auto';
+      expandedContent.style.overflow = 'visible';
+    }}
+  );
+
+  // Stagger-fade each content section
+  gsap.fromTo(sections,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.5, stagger: 0.15, ease: 'power2.out', delay: 0.3 }
+  );
+
+  // Stats count-up animation
+  statItems.forEach((item, i) => {
+    const numEl = item.querySelector('.stat-number');
+    if (!numEl) return;
+    const target = parseFloat(numEl.dataset.value);
+    const suffix = numEl.dataset.suffix || '';
+    const useComma = numEl.dataset.format === 'comma';
+    const obj = { val: 0 };
+    numEl.textContent = '0';
+
+    gsap.fromTo(item,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.4 + i * 0.15 }
+    );
+
+    gsap.to(obj, {
+      val: target,
+      duration: 1.4,
+      ease: 'power2.out',
+      delay: 0.4 + i * 0.15,
+      onUpdate() {
+        const v = Math.round(obj.val);
+        numEl.textContent = (useComma ? v.toLocaleString() : v) + suffix;
+      }
+    });
+  });
+
+  // Start boundary tracking
+  startBmwCtaBoundaryCheck(btn, caseStudy);
+
+  // Scroll to expanded content
+  setTimeout(() => {
+    expandedContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 400);
+}
+
+function collapseCase(btn, expandedContent, caseStudy) {
+  const sections = expandedContent.querySelectorAll('.case-stats-bar, .case-content-section');
+
+  // Stop boundary tracking
+  stopBmwCtaBoundaryCheck(btn);
+
+  // Scroll to hero first, then collapse
+  caseStudy.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Wait for scroll to settle, then animate collapse
+  setTimeout(() => {
+    // Fade out content sections
+    gsap.to(sections, {
+      opacity: 0, y: -20, duration: 0.3, stagger: 0.05, ease: 'power2.in'
+    });
+
+    // Collapse height
+    gsap.to(expandedContent, {
+      height: 0, opacity: 0, duration: 0.5, ease: 'power2.inOut', delay: 0.2,
+      onComplete: () => {
+        expandedContent.classList.remove('expanded');
+        caseStudy.classList.remove('case-expanded');
+        expandedContent.style.overflow = '';
+
+        // Return button to its original position
+        btn.classList.remove('expanded');
+        btn.querySelector('.cta-text').textContent = 'Learn More';
+        btn.querySelector('.cta-icon').innerHTML = '→';
+
+        // Reset stat numbers
+        expandedContent.querySelectorAll('.stat-number').forEach(el => { el.textContent = '0'; });
+      }
+    });
+  }, 600);
 }
 
 // Scroll lock helper functions

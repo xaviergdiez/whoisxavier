@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMW/MINI Case Study - Xavier Garcia</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="bmw-mini.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="case-study-page">
+  <!-- Navigation -->
+  <nav class="services-nav">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 256 256">
+          <g>
+            <path d="M217.6,36.9C193.2,12.9,161,0,126.9.2h0s0,0,0,0c-34.1.3-66.1,13.9-90,38.2C12.9,62.8,0,95,.2,129.1c.3,34.1,13.9,66.1,38.2,90,24.3,23.9,56.5,36.9,90.7,36.6,0,0,0,0,0,0,70.4-.6,127.2-58.4,126.6-128.9-.3-34.1-13.9-66.1-38.2-90ZM128.8,216.8s0,0,0,0c-23.7.2-46.1-8.8-63-25.5-16.9-16.6-26.3-38.8-26.5-62.5-.2-23.7,8.8-46.1,25.5-63,16.6-16.9,38.8-26.3,62.5-26.5,0,0,0,0,0,0h0c23.7-.2,46.1,8.8,63,25.5,16.9,16.6,26.3,38.8,26.5,62.6.4,48.9-39,89.1-88,89.5Z"/>
+            <polygon points="184.8 98.7 157.2 71.2 128 100.4 98.7 71.2 71.2 98.7 100.4 128 100.4 128 91.8 136.6 71.2 157.2 98.7 184.8 117.1 166.4 117.1 166.4 128 155.6 157.2 184.8 184.8 157.2 155.6 128 184.8 98.7"/>
+          </g>
+        </svg>
+        <div class="logo-text-container">
+          <span class="logo-text">Xavier Garcia</span>
+          <span class="logo-subtitle">Creative Developer</span>
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="../index.html#hero">Home</a></li>
+        <li><a href="../index.html#work">Work</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="case-hero">
+    <div class="masonry-grid" id="masonry-grid">
+      <!-- Banners will be dynamically loaded here -->
+    </div>
+    <div class="case-hero-content">
+      <h1 class="case-hero-title">BMW/MINI</h1>
+      <h2 class="case-hero-subtitle">Global assets at scale</h2>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="case-stats-bar">
+    <div class="stat-item">
+      <span class="stat-number" data-value="34000" data-suffix="+" data-format="comma">0</span>
+      <span class="stat-label">Assets</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-value="27" data-suffix="+">0</span>
+      <span class="stat-label">Markets</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-value="71" data-suffix="%">0</span>
+      <span class="stat-label">Cost Reduction</span>
+    </div>
+  </section>
+
+  <!-- Challenge Section -->
+  <section class="case-content-section">
+    <div class="case-content-inner">
+      <h2 class="section-heading">Challenge</h2>
+      <p>BMW/MINI needed to streamline global creative production across 27+ markets while maintaining brand consistency. The scale of operations demanded a system capable of handling thousands of assets simultaneously, with rapid localization and deployment across diverse platforms and regions.</p>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="case-content-section case-content-alt">
+    <div class="case-content-inner">
+      <h2 class="section-heading">Solution</h2>
+      <p>We built a Dynamic Creative Optimization (DCO) system — an automated asset generation pipeline enabling real-time localization, brand compliance validation, and multi-platform deployment. The system supports over 300M+ dynamic variable combinations, ensuring every market receives on-brand, locally relevant creative at scale.</p>
+      <ul class="solution-list">
+        <li>Automated asset generation pipeline</li>
+        <li>Real-time localization engine</li>
+        <li>Brand compliance validation</li>
+        <li>Multi-platform deployment</li>
+        <li>300M+ dynamic variable combinations</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="case-content-section">
+    <div class="case-content-inner">
+      <h2 class="section-heading">Results</h2>
+      <div class="results-grid">
+        <div class="result-item">
+          <span class="result-number">75%</span>
+          <span class="result-label">Production time reduction</span>
+        </div>
+        <div class="result-item">
+          <span class="result-number">71%</span>
+          <span class="result-label">Cost reduction</span>
+        </div>
+        <div class="result-item">
+          <span class="result-number">40+</span>
+          <span class="result-label">Markets served</span>
+        </div>
+        <div class="result-item">
+          <span class="result-number">500+</span>
+          <span class="result-label">Variants per campaign</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section class="case-content-section case-content-alt">
+    <div class="case-content-inner">
+      <h2 class="section-heading">Tech Stack</h2>
+      <div class="tech-stack-grid">
+        <span class="tech-stack-item">React.js</span>
+        <span class="tech-stack-item">GSAP</span>
+        <span class="tech-stack-item">HTML5 Canvas</span>
+        <span class="tech-stack-item">Node.js</span>
+        <span class="tech-stack-item">Figma API</span>
+        <span class="tech-stack-item">Adobe CC</span>
+        <span class="tech-stack-item">Design Tokens</span>
+        <span class="tech-stack-item">Automation Scripts</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="case-footer">
+    <a href="../index.html#work" class="back-link">&larr; Back to Work</a>
+  </footer>
+
+  <script>
+    // Masonry grid — reuses algorithm from main site
+    async function loadMasonryGrid() {
+      try {
+        const response = await fetch('../manifest.json');
+        const data = await response.json();
+        const banners = data.banners;
+
+        const sortedBanners = banners.sort((a, b) => {
+          const areaA = a.width * a.height;
+          const areaB = b.width * b.height;
+          if (areaA !== areaB) return areaB - areaA;
+          return a.name.localeCompare(b.name);
+        });
+
+        const masonryGrid = document.getElementById('masonry-grid');
+        masonryGrid.innerHTML = '';
+        masonryGrid.classList.remove('loaded');
+
+        const positions = calculateMasonryPositions(sortedBanners);
+
+        sortedBanners.forEach((banner, index) => {
+          const bannerItem = document.createElement('div');
+          bannerItem.className = 'banner-item';
+          bannerItem.style.position = 'absolute';
+          bannerItem.style.overflow = 'hidden';
+          bannerItem.dataset.bannerIndex = index;
+
+          const pos = positions[index];
+          bannerItem.style.left = `${pos.x}px`;
+          bannerItem.style.top = `${pos.y}px`;
+          bannerItem.style.width = `${pos.width}px`;
+          bannerItem.style.height = `${pos.height}px`;
+
+          // Placeholder
+          const placeholder = document.createElement('div');
+          placeholder.className = 'banner-placeholder';
+          placeholder.style.cssText = 'width:100%;height:100%;background:#1a1a1a;border:1px solid #333;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#666;font-size:11px;font-family:system-ui,sans-serif;flex-direction:column;text-align:center;';
+          placeholder.innerHTML = `<div style="font-weight:500;margin-bottom:4px">${banner.name}</div><div style="font-size:9px;opacity:.7">${banner.width}×${banner.height}</div>`;
+          bannerItem.appendChild(placeholder);
+          masonryGrid.appendChild(bannerItem);
+        });
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            masonryGrid.classList.add('loaded');
+            // Lazy-load iframes
+            sortedBanners.forEach((banner, index) => {
+              const item = document.querySelector(`[data-banner-index="${index}"]`);
+              if (!item) return;
+              const iframe = document.createElement('iframe');
+              iframe.src = '../' + banner.path;
+              iframe.loading = 'lazy';
+              iframe.scrolling = 'no';
+              iframe.style.cssText = 'border:none;border-radius:4px;width:100%;height:100%;display:block;overflow:hidden;';
+              iframe.onload = () => {
+                const ph = item.querySelector('.banner-placeholder');
+                if (ph) ph.remove();
+              };
+              item.appendChild(iframe);
+            });
+          });
+        });
+      } catch (error) {
+        console.error('Error loading banner manifest:', error);
+      }
+    }
+
+    function calculateMasonryPositions(banners) {
+      const positions = [];
+      const gridWidth = 1800;
+      const gridHeight = 1800;
+      const gap = 30;
+      const occupiedAreas = [];
+
+      function deterministicRandom(seed) {
+        const x = Math.sin(seed) * 10000;
+        return x - Math.floor(x);
+      }
+
+      function rectanglesOverlap(x1, y1, w1, h1, x2, y2, w2, h2) {
+        return !(x1 + w1 + gap <= x2 || x2 + w2 + gap <= x1 ||
+                 y1 + h1 + gap <= y2 || y2 + h2 + gap <= y1);
+      }
+
+      function findValidPosition(width, height, bannerIndex) {
+        const zones = [
+          { x: 0, y: 0, w: gridWidth * 0.4, h: gridHeight * 0.4 },
+          { x: gridWidth * 0.6, y: 0, w: gridWidth * 0.4, h: gridHeight * 0.4 },
+          { x: 0, y: gridHeight * 0.6, w: gridWidth * 0.4, h: gridHeight * 0.4 },
+          { x: gridWidth * 0.6, y: gridHeight * 0.6, w: gridWidth * 0.4, h: gridHeight * 0.4 },
+          { x: gridWidth * 0.2, y: gridHeight * 0.2, w: gridWidth * 0.6, h: gridHeight * 0.6 }
+        ];
+
+        const preferredZone = zones[bannerIndex % zones.length];
+        const otherZones = zones.filter((_, i) => i !== (bannerIndex % zones.length));
+        const zonesToTry = [preferredZone, ...otherZones];
+
+        for (const zone of zonesToTry) {
+          const stepSize = 60;
+          const startX = Math.max(0, zone.x);
+          const endX = Math.min(gridWidth - width, zone.x + zone.w - width);
+          const startY = Math.max(0, zone.y);
+          const endY = Math.min(gridHeight - height, zone.y + zone.h - height);
+
+          for (let attempt = 0; attempt < 20; attempt++) {
+            const randomX = deterministicRandom(bannerIndex * 100 + attempt * 7);
+            const randomY = deterministicRandom(bannerIndex * 150 + attempt * 11);
+            const x = startX + (randomX * (endX - startX));
+            const y = startY + (randomY * (endY - startY));
+            const roundedX = Math.round(x / stepSize) * stepSize;
+            const roundedY = Math.round(y / stepSize) * stepSize;
+
+            if (roundedX >= 0 && roundedY >= 0 &&
+                roundedX + width <= gridWidth && roundedY + height <= gridHeight) {
+              let overlaps = false;
+              for (const area of occupiedAreas) {
+                if (rectanglesOverlap(roundedX, roundedY, width, height, area.x, area.y, area.w, area.h)) {
+                  overlaps = true;
+                  break;
+                }
+              }
+              if (!overlaps) return { x: roundedX, y: roundedY };
+            }
+          }
+        }
+
+        const stepSize = 50;
+        for (let y = 0; y <= gridHeight - height; y += stepSize) {
+          for (let x = 0; x <= gridWidth - width; x += stepSize) {
+            let overlaps = false;
+            for (const area of occupiedAreas) {
+              if (rectanglesOverlap(x, y, width, height, area.x, area.y, area.w, area.h)) {
+                overlaps = true;
+                break;
+              }
+            }
+            if (!overlaps) return { x, y };
+          }
+        }
+
+        const fallbackY = occupiedAreas.length > 0
+          ? Math.max(...occupiedAreas.map(area => area.y + area.h)) + gap
+          : 0;
+        return {
+          x: Math.min(bannerIndex * 100, gridWidth - width),
+          y: Math.min(fallbackY, gridHeight - height)
+        };
+      }
+
+      banners.forEach((banner, index) => {
+        const position = findValidPosition(banner.width, banner.height, index);
+        positions.push({ x: position.x, y: position.y, width: banner.width, height: banner.height });
+        occupiedAreas.push({ x: position.x, y: position.y, w: banner.width, h: banner.height });
+      });
+
+      return positions;
+    }
+
+    function animateStats() {
+      const items = document.querySelectorAll('.stat-item');
+
+      items.forEach((item, i) => {
+        const numEl = item.querySelector('.stat-number');
+        const target = parseFloat(numEl.dataset.value);
+        const suffix = numEl.dataset.suffix || '';
+        const useComma = numEl.dataset.format === 'comma';
+        const obj = { val: 0 };
+
+        // Fade/slide each item in sequence
+        gsap.fromTo(item,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            delay: i * 0.15,
+            scrollTrigger: {
+              trigger: '.case-stats-bar',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+
+        // Count up the number
+        gsap.to(obj, {
+          val: target,
+          duration: 1.4,
+          ease: 'power2.out',
+          delay: i * 0.15,
+          scrollTrigger: {
+            trigger: '.case-stats-bar',
+            start: 'top 85%',
+            once: true
+          },
+          onUpdate() {
+            const v = Math.round(obj.val);
+            numEl.textContent = (useComma ? v.toLocaleString() : v) + suffix;
+          }
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadMasonryGrid();
+      gsap.registerPlugin(ScrollTrigger);
+      animateStats();
+    });
+  </script>
+</body>
+
+</html>

@@ -225,15 +225,32 @@ body {
 }
 
 #bmw-mini-case {
+    height: auto;
+    overflow: visible;
+    padding: 0;
+    gap: 0;
+    justify-content: flex-start;
+}
+
+.bmw-hero-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-32);
+    padding: var(--space-24);
+    overflow: hidden;
     background:
       radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%),
       linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 25%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.8) 100%);
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden;
 }
 
-#bmw-mini-case::before {
+.bmw-hero-wrapper::before {
     content: '';
     position: absolute;
     top: 0;
@@ -796,46 +813,175 @@ body {
     transform: rotate(180deg);
 }
 
-/* Expandable Content */
+/* When expanded, CTA floats fixed at bottom-right of viewport */
+#bmw-mini-cta.expanded {
+    position: fixed !important;
+    bottom: clamp(1rem, 4vh, 2rem) !important;
+    right: clamp(2rem, 5vw, 4rem) !important;
+    left: auto !important;
+    transform: none !important;
+    z-index: 9999 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* When hero is still visible, keep button in its original absolute spot */
+#bmw-mini-cta.expanded.cta-at-origin {
+    position: absolute !important;
+}
+
+/* When scrolled past the case study bottom, pin CTA to the section's bottom edge */
+#bmw-mini-cta.expanded.cta-pinned {
+    position: absolute !important;
+    bottom: clamp(1rem, 4vh, 2rem) !important;
+    right: clamp(2rem, 5vw, 4rem) !important;
+}
+
+/* Expandable Content — inline expand (GSAP controls height) */
 .case-expanded-content {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.95) 0%,
-        rgba(0, 0, 0, 0.85) 50%,
-        rgba(0, 0, 0, 0.7) 100%
-    );
-    backdrop-filter: blur(20px);
     overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 50;
-    padding: 0;
+    height: 0;
     opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
+    position: relative;
+    z-index: 60;
+    background: var(--color-charcoal-800, #262828);
 }
 
 .case-expanded-content.expanded {
     opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    padding: clamp(2rem, 5vw, 4rem);
 }
 
 .expanded-inner {
     color: white;
     width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: rgba(122, 227, 252, 0.3) transparent; /* Firefox */
-    padding: 0.5rem 0; /* Add some internal padding */
 }
+
+/* BMW/MINI expanded content styles */
+#bmw-mini-expanded .case-stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    padding: 3rem clamp(2rem, 5vw, 4rem);
+    background: var(--color-charcoal-700, #1f2121);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#bmw-mini-expanded .stat-item {
+    text-align: center;
+}
+
+#bmw-mini-expanded .stat-item .stat-number {
+    display: block;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: var(--font-weight-bold, 600);
+    font-family: var(--font-family-mono, monospace);
+    color: var(--color-white, #fff);
+}
+
+#bmw-mini-expanded .stat-item .stat-label {
+    display: block;
+    font-size: var(--font-size-sm, 12px);
+    color: var(--color-gray-400, rgba(119, 124, 124, 1));
+    margin-top: 0.25em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+#bmw-mini-expanded .case-content-section {
+    padding: 5rem clamp(2rem, 5vw, 4rem);
+    background: var(--color-charcoal-800, #262828);
+}
+
+#bmw-mini-expanded .case-content-alt {
+    background: var(--color-charcoal-700, #1f2121);
+}
+
+#bmw-mini-expanded .case-content-inner {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#bmw-mini-expanded .section-heading {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: var(--font-weight-semibold, 550);
+    margin-bottom: 1.5rem;
+    letter-spacing: var(--letter-spacing-tight, -0.01em);
+    color: var(--color-white, #fff);
+}
+
+#bmw-mini-expanded .case-content-section p {
+    font-size: var(--font-size-lg, 16px);
+    line-height: 1.7;
+    color: var(--color-gray-300, rgba(167, 169, 169, 1));
+}
+
+#bmw-mini-expanded .solution-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+#bmw-mini-expanded .solution-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--color-gray-300, rgba(167, 169, 169, 1));
+    font-size: var(--font-size-base, 14px);
+}
+
+#bmw-mini-expanded .solution-list li::before {
+    content: '+ ';
+    color: var(--color-gray-400, rgba(119, 124, 124, 1));
+    font-weight: var(--font-weight-semibold, 550);
+}
+
+#bmw-mini-expanded .results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+#bmw-mini-expanded .result-item {
+    text-align: left;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+#bmw-mini-expanded .result-number {
+    display: block;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: var(--font-weight-bold, 600);
+    font-family: var(--font-family-mono, monospace);
+    color: var(--color-white, #fff);
+}
+
+#bmw-mini-expanded .result-label {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: var(--font-size-sm, 12px);
+    color: var(--color-gray-400, rgba(119, 124, 124, 1));
+}
+
+#bmw-mini-expanded .tech-stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+#bmw-mini-expanded .tech-stack-item {
+    padding: 0.5rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    font-size: var(--font-size-sm, 12px);
+    font-family: var(--font-family-mono, monospace);
+    color: var(--color-gray-300, rgba(167, 169, 169, 1));
+}
+
 
 /* Custom scrollbar for webkit browsers */
 .expanded-inner::-webkit-scrollbar {
@@ -953,30 +1099,23 @@ body {
         gap: 1.5rem;
     }
     
-    .case-expanded-content.expanded {
-        padding: 1.5rem;
+    #bmw-mini-expanded .case-stats-bar {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem clamp(1.5rem, 4vw, 2rem);
     }
-    
-    .expanded-inner {
-        height: 100%;
-        max-height: 80vh;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+
+    #bmw-mini-expanded .results-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    #bmw-mini-expanded .case-content-section {
+        padding: 3rem 1.5rem;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .case-expanded-content.expanded {
-        padding: 1rem;
-    }
-    
-    .expanded-inner {
-        height: 100%;
-        max-height: 75vh;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-        padding-bottom: 2rem; /* Extra space at bottom for better UX */
-    }
     
     /* Ensure case sections don't get cut off */
     .case-detail-section {
